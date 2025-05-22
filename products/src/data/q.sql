@@ -1,0 +1,1 @@
+INSERT INTO PRODUCT(price, rating, description, title) VALUES(20, 4.5, 'World', 'Hello');
