@@ -16,6 +16,7 @@ public class Product {
     String description;
     double price;
     float rating;
+    
 
     public Product() {
     }
