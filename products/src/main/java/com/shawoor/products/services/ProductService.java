@@ -40,6 +40,22 @@ public class ProductService {
         return productRepository.findByDescriptionContainingIgnoreCaseAndRating(description, rating);
     }
 
+    public List<Product> getProductByBrand(String brand) {
+        return productRepository.findByBrandContainingIgnoreCase(brand);
+    }
+
+    public List<Product> getProductsByCategory(String category) {
+        return productRepository.findByCategoryContainingIgnoreCase(category);
+    }
+
+    public List<Product> getProductsByBrandAndCategory(String brand, String category) {
+        return productRepository.findByBrandAndCategoryContainingIgnoreCase(brand, category);
+    }
+
+    public List<Product> getProductsByTitleBrandAndCategory(String title, String brand, String category) {
+        return productRepository.findByTitleBrandAndCategoryContainingIgnoreCase(title, brand, category);
+    }
+
     public Product updateProduct(Long id, Product productDetails) {
         Product product = productRepository.findById(id).orElseThrow();
         product.setTitle(productDetails.getTitle());
@@ -57,4 +73,6 @@ public class ProductService {
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
+
+
 }

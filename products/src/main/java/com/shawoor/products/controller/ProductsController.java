@@ -3,7 +3,6 @@ package com.shawoor.products.controller;
 import com.shawoor.products.model.Product;
 import com.shawoor.products.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.MergedAnnotations;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +41,26 @@ public class ProductsController {
     @GetMapping("/description-rating")
     public List<Product> getProductsByDescriptionAndRating(@RequestParam String description, @RequestParam float rating) {
         return productService.getProductsByDescriptionAndRating(description, rating);
+    }
+
+    @GetMapping("/brand")
+    public List<Product> getProductByBrand(@RequestParam String brand) {
+        return productService.getProductByBrand(brand);
+    }
+
+    @GetMapping("/category")
+    public List<Product> getProductsByCategory(@RequestParam String category) {
+        return productService.getProductsByCategory(category);
+    }
+
+    @GetMapping("/brand-category")
+    public List<Product> getProductsByBrandAndCategory(@RequestParam String brand, @RequestParam String category) {
+        return productService.getProductsByBrandAndCategory(brand, category);
+    }
+
+    @GetMapping("/advanced")
+    public List<Product> getProductsByTitleBrandAndCategory(@RequestParam String title, @RequestParam String brand, @RequestParam String category) {
+        return productService.getProductsByTitleBrandAndCategory(title, brand, category);
     }
 
     @PutMapping("/{id}")

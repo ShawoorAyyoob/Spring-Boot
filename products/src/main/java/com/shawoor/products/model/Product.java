@@ -16,17 +16,20 @@ public class Product {
     String description;
     double price;
     float rating;
-    
+    String category;
+    String brand;
 
     public Product() {
     }
 
-    public Product(Long id, String title, String description, double price, float rating) {
+    public Product(Long id, String title, String description, double price, float rating, String category, String brand) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
         this.rating = rating;
+        this.category = category;
+        this.brand = brand;
     }
 
     public Long getId() {
@@ -67,5 +70,21 @@ public class Product {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }
