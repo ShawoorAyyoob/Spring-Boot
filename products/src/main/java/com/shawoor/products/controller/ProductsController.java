@@ -59,8 +59,18 @@ public class ProductsController {
     }
 
     @GetMapping("/advanced")
-    public List<Product> getProductsByTitleBrandAndCategory(@RequestParam String title, @RequestParam String brand, @RequestParam String category) {
-        return productService.getProductsByTitleBrandAndCategory(title, brand, category);
+    public List<Product> getProductsByTitleAndBrandAndCategory(@RequestParam String title, @RequestParam String brand, @RequestParam String category) {
+        return productService.getProductsByTitleAndBrandAndCategory(title, brand, category);
+    }
+
+    @GetMapping("/category-title")
+    public List<Product> getProductsByCategoryAndTitle(@RequestParam String category) {
+        return productService.getProductsByCategoryAndTitle(category);
+    }
+
+    @GetMapping("/price-desc")
+    public List<Product> getProductsByPriceDesc() {
+        return productService.getProductsByPriceDesc();
     }
 
     @PutMapping("/{id}")
