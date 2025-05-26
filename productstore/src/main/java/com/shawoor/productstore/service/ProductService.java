@@ -28,4 +28,8 @@ public class ProductService {
     public List<Product> getProductByPrice(int minPrice, int maxPrice) {
         return productRepository.findByPriceBetween(minPrice, maxPrice);
     }
+
+    public List<Product> getProductsByBrandAndPrice(String brand, int minPrice, int maxPrice) {
+        return productRepository.findByBrandContainingIgnoreCaseAndPriceBetween(brand, minPrice, maxPrice);
+    }
 }

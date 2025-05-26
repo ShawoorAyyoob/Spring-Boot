@@ -1,0 +1,6 @@
+2025-05-26 11:20:18.239356+05:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]""SELECT p FROM Product p WHERE p.brand = :brand AND p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.price"""; SQL statement:
+"SELECT p FROM Product p WHERE p.brand = :brand AND p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.price" [42000-232]
+2025-05-26 11:20:27.289809+05:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT p FROM Product p WHERE p.brand = [*]:brand AND p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.price"; expected "ALL (, ANY (, SOME ("; SQL statement:
+SELECT p FROM Product p WHERE p.brand = :brand AND p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.price [42001-232]

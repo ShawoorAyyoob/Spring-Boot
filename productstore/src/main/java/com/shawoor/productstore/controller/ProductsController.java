@@ -3,6 +3,7 @@ package com.shawoor.productstore.controller;
 import com.shawoor.productstore.model.Product;
 import com.shawoor.productstore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,4 +36,12 @@ public class ProductsController {
     public List<Product> getProductsByPrice(@RequestParam int minPrice, @RequestParam int maxPrice) {
         return productService.getProductByPrice(minPrice, maxPrice);
     }
+    @GetMapping("/brand-price")
+    public List<Product> getProductsByBrandAndPrice(@RequestParam String brand, @RequestParam int minPrice, @RequestParam int maxPrice) {
+        return productService.getProductsByBrandAndPrice(brand, minPrice, maxPrice);
+    }
+//    @Query("SELECT p FROM Product p WHERE p.brand = :brand AND p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.price")
+//    public List<Product> getProductsByBrandAndPrice(String brand, int minPrice, int maxPrice){
+//        return productService.getProductsByBrandAndPrice(brand, minPrice, maxPrice);
+//    }
 }
