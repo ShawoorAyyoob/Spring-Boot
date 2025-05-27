@@ -13,5 +13,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByPriceBetween(int minPrice, int maxPrice);
 
+<<<<<<< HEAD
     List<Product> findByTitleStartingWith(String prefix);
+=======
+    List<Product> findByBrandContainingIgnoreCaseAndPriceBetween(String brand, int minPrice, int maxPrice);
+>>>>>>> 8b6dc2ebd20342addce62617373dc69a51d7a507
 }
