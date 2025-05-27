@@ -29,12 +29,9 @@ public class ProductService {
         return productRepository.findByPriceBetween(minPrice, maxPrice);
     }
 
-<<<<<<< HEAD
     public List<Product> getProductByTitle(String prefix) {
         return productRepository.findByTitleStartingWith(prefix);
-=======
     public List<Product> getProductsByBrandAndPrice(String brand, int minPrice, int maxPrice) {
         return productRepository.findByBrandContainingIgnoreCaseAndPriceBetween(brand, minPrice, maxPrice);
->>>>>>> 8b6dc2ebd20342addce62617373dc69a51d7a507
     }
 }
