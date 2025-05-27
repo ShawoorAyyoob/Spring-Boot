@@ -31,6 +31,11 @@ public class ProductsController {
         return productService.getProductByBrand(brand);
     }
 
+    @GetMapping("/title-prefix")
+    public List<Product> getProductsByTitle(@RequestParam String prefix) {
+        return productService.getProductByTitle(prefix);
+    }
+
     @GetMapping("/price-range")
     public List<Product> getProductsByPrice(@RequestParam int minPrice, @RequestParam int maxPrice) {
         return productService.getProductByPrice(minPrice, maxPrice);
