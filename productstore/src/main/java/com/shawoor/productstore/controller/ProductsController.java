@@ -41,10 +41,10 @@ public class ProductsController {
     public List<Product> getProductsByPrice(@RequestParam int minPrice, @RequestParam int maxPrice) {
         return productService.getProductByPrice(minPrice, maxPrice);
     }
-    @GetMapping("/brand-price")
-    public List<Product> getProductsByBrandAndPrice(@RequestParam String brand, @RequestParam int minPrice, @RequestParam int maxPrice) {
-        return productService.getProductsByBrandAndPrice(brand, minPrice, maxPrice);
-    }
+    // @GetMapping("/brand-price")
+    // public List<Product> getProductsByBrandAndPrice(@RequestParam String brand, @RequestParam int minPrice, @RequestParam int maxPrice) {
+    //     return productService.getProductsByBrandAndPrice(brand, minPrice, maxPrice);
+    // }
 //    @Query("SELECT p FROM Product p WHERE p.brand = :brand AND p.price BETWEEN :minPrice AND :maxPrice ORDER BY p.price")
 //    public List<Product> getProductsByBrandAndPrice(String brand, int minPrice, int maxPrice){
 //        return productService.getProductsByBrandAndPrice(brand, minPrice, maxPrice);
