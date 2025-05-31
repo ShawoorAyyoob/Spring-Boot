@@ -6,12 +6,17 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "dept")
 public class Department {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
-    //    @JsonManagedReference
+    
+    @JsonManagedReference
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Employee> employees;
 

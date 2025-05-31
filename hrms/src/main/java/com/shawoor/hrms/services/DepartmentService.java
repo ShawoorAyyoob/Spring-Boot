@@ -1,7 +1,6 @@
 package com.shawoor.hrms.services;
 
 import com.shawoor.hrms.model.Department;
-import com.shawoor.hrms.model.Employee;
 import com.shawoor.hrms.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
