@@ -1,6 +1,7 @@
 package com.shawoor.products.controller;
 
 import com.shawoor.products.model.Product;
+import com.shawoor.products.model.ResponseMessage;
 import com.shawoor.products.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,10 +26,13 @@ public class ProductsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+    public ResponseEntity<?> getProductById(@PathVariable Long id) {
         Product product = productService.getProductById(id);
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setMessage("Error with fetching Product " + id);
+
         if (product == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMessage);
         } else {
             return ResponseEntity.status(HttpStatus.FOUND).body(product);
         }
@@ -80,10 +84,12 @@ public class ProductsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
         Product product = productService.updateProduct(id, productDetails);
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setMessage("Error with Updating Product " + id);
         if (product == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMessage);
         } else {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(product);
         }
@@ -100,12 +106,15 @@ public class ProductsController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+//    public ResponseEntity<Void> deleteProduct(@PathVariable Long id)
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
         boolean status = productService.deleteProduct(id);
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setMessage("Error with Deleting Product " + id);
         if (status) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseMessage);
         }
     }
 }
