@@ -17,7 +17,8 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    public User createUser(User user){
+
+    public User createUser(User user) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(5);
         String rawPassword = user.getPassword();
         String hashedPassword = bCryptPasswordEncoder.encode(rawPassword);
@@ -25,7 +26,7 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return this.userRepository.findAll();
     }
 }

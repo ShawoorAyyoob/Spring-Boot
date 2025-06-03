@@ -3,10 +3,7 @@ package com.shawoor.topsecurity.controller;
 import com.shawoor.topsecurity.model.User;
 import com.shawoor.topsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,12 +18,12 @@ public class UserController {
     }
 
     @PostMapping
-    public User registerUser(User user){
+    public User registerUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
     @GetMapping
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return userService.getUsers();
     }
 }
