@@ -3,6 +3,8 @@ package com.shawoor.recipes.controller;
 import com.shawoor.recipes.model.Recipe;
 import com.shawoor.recipes.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +25,13 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    public Recipe getRecipeById(@PathVariable Long id) {
-        return recipeService.getRecipeById(id);
+    public ResponseEntity<Recipe> getRecipeById(@PathVariable Long id) {
+        Recipe recipe = recipeService.getRecipeById(id);
+        if (recipe == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(recipe);
+        }
     }
 
     @GetMapping("/search")
@@ -38,18 +45,33 @@ public class RecipeController {
     }
 
     @PostMapping
-    public Recipe createRecipe(@RequestBody Recipe recipe) {
-        return recipeService.createRecipe(recipe);
+    public ResponseEntity<Recipe> createRecipe(@RequestBody Recipe recipe) {
+        Recipe createdRecipe = recipeService.createRecipe(recipe);
+        if (createdRecipe != null) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdRecipe);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
+
     @PutMapping("/{id}")
-    public Recipe updateRecipe(@PathVariable Long id, @RequestBody Recipe recipe) {
-        return recipeService.updateRecipe(id, recipe);
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @RequestBody Recipe recipe) {
+        Recipe recipe2 = recipeService.updateRecipe(id, recipe);
+        if (recipe2 == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(recipe2);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public Recipe deleteRecipe(@PathVariable Long id) {
-        recipeService.deleteRecipe(id);
-        return null;
+    public ResponseEntity<Recipe> deleteRecipe(@PathVariable Long id) {
+        boolean isDeleted = recipeService.deleteRecipe(id);
+        if (isDeleted) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } else {
+            return ResponseEntity.ok().build();
+        }
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -21,17 +22,15 @@ public class RecipeService {
     }
 
     public Recipe getRecipeById(Long id) {
-//        Recipe dummyRecipe = new Recipe();
-//        dummyRecipe.setName("--No Recipe found--");
-//        dummyRecipe.setIngredients("--");
-//        dummyRecipe.setPrepTimeMinutes(0);
-//        dummyRecipe.setCuisine("--");
-//        dummyRecipe.setRating(0);
         return recipeRepository.findById(id).orElse(null);
     }
 
     public Recipe createRecipe(Recipe recipe) {
-        return recipeRepository.save(recipe);
+        if (recipe == null) {
+            return null;
+        } else {
+            return recipeRepository.save(recipe);
+        }
     }
 
     public Recipe searchRecipeName(String name) {
@@ -43,16 +42,23 @@ public class RecipeService {
     }
 
     public Recipe updateRecipe(Long id, Recipe newRecipe) {
-        Recipe recipe = recipeRepository.findById(id).orElseThrow(null);
-        recipe.setName(newRecipe.getName());
-        recipe.setIngredients(newRecipe.getIngredients());
-        recipe.setCuisine(newRecipe.getCuisine());
-        recipe.setRating(newRecipe.getRating());
-        recipe.setPrepTimeMinutes(newRecipe.getPrepTimeMinutes());
-        return recipeRepository.save(newRecipe);
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
+        if (optionalRecipe.isEmpty()) {
+            return null;
+        } else {
+            Recipe recipe = optionalRecipe.get();
+            recipe.setName(newRecipe.getName());
+            recipe.setIngredients(newRecipe.getIngredients());
+            recipe.setCuisine(newRecipe.getCuisine());
+            recipe.setRating(newRecipe.getRating());
+            recipe.setPrepTimeMinutes(newRecipe.getPrepTimeMinutes());
+            return recipeRepository.save(newRecipe);
+        }
+
     }
 
-    public void deleteRecipe(Long id) {
+    public boolean deleteRecipe(Long id) {
         recipeRepository.deleteById(id);
+        return false;
     }
 }
